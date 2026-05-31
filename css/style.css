@@ -1,7 +1,10 @@
+/* ==========================================================================
+   1. ОБЩИЕ СТИЛИ И СБРОСЫ (БРУТАЛЬНЫЙ МИНИМАЛИЗМ)
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
-    box-index: border-box;
+    box-sizing: border-box; /* Исправлено с box-index */
 }
 
 body {
@@ -35,6 +38,9 @@ body {
     color: #000000;
 }
 
+/* ==========================================================================
+   2. ШАПКА (HEADER) И НАВИГАЦИЯ
+   ========================================================================== */
 .header {
     width: 100%;
     padding: 30px 0;
@@ -101,6 +107,9 @@ body {
     transition: transform 0.3s, opacity 0.3s;
 }
 
+/* ==========================================================================
+   3. БЛОК: ОБО МНЕ (ABOUT ME)
+   ========================================================================== */
 .about-section {
     padding: 150px 0 100px 0;
     background-color: #ffffff;
@@ -128,7 +137,7 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    filter: none !important;
+    filter: none !important; /* Фото Обо мне всегда цветное */
 }
 
 .about-content {
@@ -141,6 +150,9 @@ body {
     color: #333333;
 }
 
+/* ==========================================================================
+   4. БЛОК: ПОРТФОЛИО (Grid-сетка и интерактив)
+   ========================================================================== */
 .portfolio-section {
     padding: 100px 0;
     background-color: #ffffff;
@@ -177,23 +189,24 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: grayscale(0%); 
     transition: filter 0.4s ease, transform 0.4s ease;
 }
 
-.portfolio-item img {
-    filter: grayscale(0%); 
-}
 .portfolio-item:hover img {
     transform: scale(1.03);
 }
 
+/* Видео изначально черно-белые */
 .portfolio-item[data-video] img {
     filter: grayscale(100%);
 }
+
 .portfolio-item[data-video]:hover img {
     filter: grayscale(0%);
 }
 
+/* ТЕМНАЯ ПЛАШКА С ИНФОРМАЦИЕЙ ПО ЦЕНТРУ ДЛЯ ПК */
 .item-hint {
     position: absolute;
     top: 0;
@@ -208,7 +221,6 @@ body {
     padding: 20px;
     text-align: center;
     box-sizing: border-box;
-
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 3;
@@ -226,19 +238,18 @@ body {
     margin: 0;
 }
 
+/* ТРЕУГОЛЬНИК PLAY ДЛЯ ВИДЕО */
 .portfolio-item[data-video]::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     width: 0;
     height: 0;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
     border-left: 30px solid rgba(255, 255, 255, 0.6);
-    
     margin-left: 5px;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 2;
@@ -250,6 +261,9 @@ body {
     transform: translate(-50%, -50%) scale(0.8);
 }
 
+/* ==========================================================================
+   5. КОНТАКТЫ И ПОДВАЛ
+   ========================================================================== */
 .socials-section {
     padding: 100px 0;
     background-color: #ffffff;
@@ -345,6 +359,9 @@ body {
     color: #000000;
 }
 
+/* ==========================================================================
+   6. УНИВЕРСАЛЬНАЯ МОДАЛКА (ОКНО ПЛЕЕРА И ФОТО)
+   ========================================================================== */
 .video-modal {
     position: fixed;
     top: 0;
@@ -410,53 +427,9 @@ body {
 
 .modal-close:hover { color: #999999; }
 
-@media (max-width: 768px) {
-    .portfolio-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-    }
-    .portfolio-item {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-    }
-    .portfolio-item, .item-vertical, .item-horizontal, .item-square {
-        grid-column: auto !important;
-        grid-row: auto !important;
-    }
-    .portfolio-item img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-    }
-
-    .portfolio-item[data-video]::before {
-        top: calc(50% - 25px);
-        border-top: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        border-left: 22px solid rgba(255, 255, 255, 0.7);
-    }
-
-    .item-hint {
-        position: relative;
-        opacity: 1;
-        background-color: #000000;
-        padding: 15px 20px;
-        height: auto;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .item-hint p {
-        font-size: 13px;
-        max-width: 100%;
-    }
-}
-
+/* ==========================================================================
+   7. АДАПТИВНАЯ МОБИЛЬНАЯ ВЕРСИЯ (ЕДИНЫЙ КОРРЕКТНЫЙ БЛОК)
+   ========================================================================== */
 @media (max-width: 768px) {
     .burger-btn {
         display: flex;
@@ -510,6 +483,7 @@ body {
         font-size: 36px;
     }
 
+    /* Мобильная лента портфолио */
     .portfolio-grid {
         display: flex;
         flex-direction: column;
@@ -519,12 +493,11 @@ body {
     .portfolio-item {
         width: 100%;
         height: auto;
+        display: flex;
+        flex-direction: column;
     }
 
-    .portfolio-item, 
-    .item-vertical, 
-    .item-horizontal, 
-    .item-square {
+    .portfolio-item, .item-vertical, .item-horizontal, .item-square {
         grid-column: auto !important;
         grid-row: auto !important;
     }
@@ -535,11 +508,30 @@ body {
         object-fit: contain;
     }
 
+    /* Значок Play на мобилках смещается строго на центр картинки */
+    .portfolio-item[data-video]::before {
+        top: calc(50% - 25px); 
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 22px solid rgba(255, 255, 255, 0.7);
+    }
+
+    /* Текст на мобилках аккуратно встает строго под картинку по центру */
     .item-hint {
         position: relative;
-        bottom: 0;
+        opacity: 1;
         background-color: #000000;
-        padding: 12px;
+        padding: 15px 20px;
+        height: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .item-hint p {
+        font-size: 13px;
+        max-width: 100%;
     }
 
     .back-to-top {
