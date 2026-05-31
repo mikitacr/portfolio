@@ -1,10 +1,7 @@
-/* ==========================================================================
-   1. ОБЩИЕ СТИЛИ И СБРОСЫ (БРУТАЛЬНЫЙ МИНИМАЛИЗМ)
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Исправлено с box-index */
+    box-sizing: border-box;
 }
 
 body {
@@ -38,9 +35,6 @@ body {
     color: #000000;
 }
 
-/* ==========================================================================
-   2. ШАПКА (HEADER) И НАВИГАЦИЯ
-   ========================================================================== */
 .header {
     width: 100%;
     padding: 30px 0;
@@ -107,9 +101,6 @@ body {
     transition: transform 0.3s, opacity 0.3s;
 }
 
-/* ==========================================================================
-   3. БЛОК: ОБО МНЕ (ABOUT ME)
-   ========================================================================== */
 .about-section {
     padding: 150px 0 100px 0;
     background-color: #ffffff;
@@ -137,7 +128,7 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    filter: none !important; /* Фото Обо мне всегда цветное */
+    filter: none !important; /* Главное фото профиля всегда цветное */
 }
 
 .about-content {
@@ -150,9 +141,6 @@ body {
     color: #333333;
 }
 
-/* ==========================================================================
-   4. БЛОК: ПОРТФОЛИО (Grid-сетка и интерактив)
-   ========================================================================== */
 .portfolio-section {
     padding: 100px 0;
     background-color: #ffffff;
@@ -197,7 +185,6 @@ body {
     transform: scale(1.03);
 }
 
-/* Видео изначально черно-белые */
 .portfolio-item[data-video] img {
     filter: grayscale(100%);
 }
@@ -206,7 +193,6 @@ body {
     filter: grayscale(0%);
 }
 
-/* ТЕМНАЯ ПЛАШКА С ИНФОРМАЦИЕЙ ПО ЦЕНТРУ ДЛЯ ПК */
 .item-hint {
     position: absolute;
     top: 0;
@@ -238,8 +224,7 @@ body {
     margin: 0;
 }
 
-/* ТРЕУГОЛЬНИК PLAY ДЛЯ ВИДЕО */
-.portfolio-item[data-video]::before {
+.portfolio-item.video-ready::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -251,19 +236,17 @@ body {
     border-bottom: 20px solid transparent;
     border-left: 30px solid rgba(255, 255, 255, 0.6);
     margin-left: 5px;
+    opacity: 1;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 2;
     pointer-events: none;
 }
 
-.portfolio-item[data-video]:hover::before {
+.portfolio-item.video-ready:hover::before {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.8);
 }
 
-/* ==========================================================================
-   5. КОНТАКТЫ И ПОДВАЛ
-   ========================================================================== */
 .socials-section {
     padding: 100px 0;
     background-color: #ffffff;
@@ -284,6 +267,8 @@ body {
 .contact-item {
     font-size: 18px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
 .contact-label {
@@ -306,7 +291,8 @@ body {
     content: 'copied!';
     position: absolute;
     left: calc(100% + 15px);
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     background-color: #000000;
     color: #ffffff;
     font-size: 12px;
@@ -315,10 +301,25 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.15s ease;
+    z-index: 10;
 }
 
 .contact-value.copied::after {
     opacity: 1;
+}
+
+.contact-link {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    color: #000000;
+    text-decoration: underline;
+    margin-left: 15px;
+    font-weight: normal;
+    transition: opacity 0.2s ease;
+}
+
+.contact-link:hover {
+    opacity: 0.6;
 }
 
 .footer {
@@ -359,9 +360,6 @@ body {
     color: #000000;
 }
 
-/* ==========================================================================
-   6. УНИВЕРСАЛЬНАЯ МОДАЛКА (ОКНО ПЛЕЕРА И ФОТО)
-   ========================================================================== */
 .video-modal {
     position: fixed;
     top: 0;
@@ -427,9 +425,6 @@ body {
 
 .modal-close:hover { color: #999999; }
 
-/* ==========================================================================
-   7. АДАПТИВНАЯ МОБИЛЬНАЯ ВЕРСИЯ (ЕДИНЫЙ КОРРЕКТНЫЙ БЛОК)
-   ========================================================================== */
 @media (max-width: 768px) {
     .burger-btn {
         display: flex;
@@ -483,7 +478,6 @@ body {
         font-size: 36px;
     }
 
-    /* Мобильная лента портфолио */
     .portfolio-grid {
         display: flex;
         flex-direction: column;
@@ -508,15 +502,13 @@ body {
         object-fit: contain;
     }
 
-    /* Значок Play на мобилках смещается строго на центр картинки */
-    .portfolio-item[data-video]::before {
+    .portfolio-item.video-ready::before {
         top: calc(50% - 25px); 
         border-top: 15px solid transparent;
         border-bottom: 15px solid transparent;
         border-left: 22px solid rgba(255, 255, 255, 0.7);
     }
 
-    /* Текст на мобилках аккуратно встает строго под картинку по центру */
     .item-hint {
         position: relative;
         opacity: 1;
@@ -532,6 +524,11 @@ body {
     .item-hint p {
         font-size: 13px;
         max-width: 100%;
+    }
+
+    .contact-link {
+        margin-left: 10px;
+        font-size: 14px;
     }
 
     .back-to-top {
