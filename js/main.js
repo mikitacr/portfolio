@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 1. БУРГЕР-МЕНЮ
     const burgerBtn = document.getElementById('burger-btn');
     const navigation = document.getElementById('navigation');
     const menuLinks = document.querySelectorAll('.menu-link');
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 2. СЛУЧАЙНЫЙ ПОРЯДОК (SHUFFLE)
     const portfolioGrid = document.querySelector('.portfolio-grid');
     
     if (portfolioGrid) {
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(item => portfolioGrid.appendChild(item));
     }
 
+    // 3. УНИВЕРСАЛЬНАЯ МОДАЛКА (С АВТОМАТИЧЕСКИМ ВЫКЛЮЧЕНИЕМ ЗВУКА)
     const modal = document.getElementById('video-modal');
     const modalPlayer = document.getElementById('modal-player');
     const modalImage = document.getElementById('modal-image');
@@ -49,17 +52,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     modal.classList.remove('modal-vertical-mode');
                 }
 
+                // Если это ВИДЕО
                 if (videoSrc) {
                     modal.classList.remove('image-mode');
                     modal.classList.add('video-mode');
                     
                     modalPlayer.src = videoSrc;
+                    modalPlayer.muted = true; // ГАРАНТИЯ ОТСУТСТВИЯ ЗВУКА ПРИ ОТКРЫТИИ
                     modal.classList.add('active');
                     
                     modalPlayer.play().catch(error => {
                         console.log("Автозапуск заблокирован браузером:", error);
                     });
                 } 
+                // Если это просто ФОТО
                 else if (clickedImg) {
                     modal.classList.remove('video-mode');
                     modal.classList.add('image-mode');
@@ -91,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 4. КОПИРОВАНИЕ КОНТАКТОВ
     const contactValues = document.querySelectorAll('.contact-value');
 
     contactValues.forEach(item => {
@@ -111,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 5. КНОПКА НАВЕРХ
     const backToTopBtn = document.getElementById('back-to-top');
 
     if (backToTopBtn) {
