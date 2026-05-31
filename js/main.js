@@ -2,45 +2,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const burgerBtn = document.getElementById('burger-btn');
     const navigation = document.getElementById('navigation');
-    const navLinks = document.querySelectorAll('.menu-link');
+    const menuLinks = document.querySelectorAll('.menu-link');
 
     if (burgerBtn && navigation) {
         burgerBtn.addEventListener('click', () => {
             burgerBtn.classList.toggle('active');
             navigation.classList.toggle('open');
-            if (navigation.classList.contains('open')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
         });
 
-        navLinks.forEach(link => {
+        menuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 burgerBtn.classList.remove('active');
                 navigation.classList.remove('open');
-                document.body.style.overflow = '';
             });
         });
     }
-
-    const menuLinks = document.querySelectorAll('.menu-link');
-
-    menuLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            link.style.color = '#000000';
-        });
-
-        link.addEventListener('mouseleave', () => {
-            link.style.color = '#555555';
-        });
-    });
 
     const portfolioGrid = document.querySelector('.portfolio-grid');
     
     if (portfolioGrid) {
         const items = Array.from(portfolioGrid.children);
-        
         for (let i = items.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [items[i], items[j]] = [items[j], items[i]];
@@ -50,30 +31,65 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(item => portfolioGrid.appendChild(item));
     }
 
-    const portfolioVideos = document.querySelectorAll('.portfolio-item video');
+    const modal = document.getElementById('video-modal');
+    const modalPlayer = document.getElementById('modal-player');
+    const modalImage = document.getElementById('modal-image');
+    const modalClose = document.querySelector('.modal-close');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-    const observerOptions = {
-        root: null, 
-        threshold: 0.2 
-    };
+    if (modal) {
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const videoSrc = item.getAttribute('data-video');
+                const clickedImg = item.querySelector('img');
 
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target;
-            
-            if (entry.isIntersecting) {
-                video.play().catch(error => {
-                    console.log("Автоплей ожидает взаимодействия пользователя:", error);
-                });
-            } else {
-                video.pause();
-            }
+                if (item.classList.contains('item-vertical')) {
+                    modal.classList.add('modal-vertical-mode');
+                } else {
+                    modal.classList.remove('modal-vertical-mode');
+                }
+
+                if (videoSrc) {
+                    modal.classList.remove('image-mode');
+                    modal.classList.add('video-mode');
+                    
+                    modalPlayer.src = videoSrc;
+                    modal.classList.add('active');
+                    
+                    modalPlayer.play().catch(error => {
+                        console.log("Автозапуск заблокирован браузером:", error);
+                    });
+                } 
+                else if (clickedImg) {
+                    modal.classList.remove('video-mode');
+                    modal.classList.add('image-mode');
+                    
+                    modalImage.src = clickedImg.getAttribute('src');
+                    modal.classList.add('active');
+                }
+            });
         });
-    }, observerOptions);
 
-    portfolioVideos.forEach(video => {
-        videoObserver.observe(video);
-    });
+        function closeModal() {
+            modal.classList.remove('active');
+            modal.classList.remove('video-mode');
+            modal.classList.remove('image-mode');
+            
+            modalPlayer.pause();
+            modalPlayer.src = "";
+            modalImage.src = "";
+        }
+
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+    }
 
     const contactValues = document.querySelectorAll('.contact-value');
 
@@ -81,14 +97,17 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', () => {
             const textToCopy = item.getAttribute('data-copy');
             
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                item.classList.add('copied');
-                setTimeout(() => {
-                    item.classList.remove('copied');
-                }, 1500);
-            }).catch(err => {
-                console.error('Не удалось скопировать текст: ', err);
-            });
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    item.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        item.classList.remove('copied');
+                    }, 1500);
+                }).catch(err => {
+                    console.error('Ошибка при копировании текста: ', err);
+                });
+            }
         });
     });
 
