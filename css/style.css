@@ -1,6 +1,3 @@
-/* ==========================================================================
-   БАЗОВЫЕ И СБРОС СТИЛЕЙ
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -8,13 +5,12 @@
 }
 
 body {
-    font-family: 'Courier New', Courier, monospace; /* Ваш фирменный моноширинный шрифт */
+    font-family: 'Courier New', Courier, monospace;
     line-height: 1.6;
     background-color: #ffffff; 
     color: #000000;
 }
 
-/* ФИКСИРОВАННЫЙ КОНТЕЙНЕР (1140px) */
 .container {
     width: 100%;
     max-width: 1140px;
@@ -22,14 +18,13 @@ body {
     padding: 0 20px; 
 }
 
-/* СТРОГИЕ КНОПКИ БЕЗ СКРУГЛЕНИЙ */
 .btn {
     display: inline-block;
     background-color: #000000; 
     color: #ffffff; 
     padding: 12px 30px;
     text-decoration: none;
-    border-radius: 0; /* Убрали скругление углов */
+    border-radius: 0;
     font-weight: bold;
     border: 1px solid #000000;
     cursor: pointer;
@@ -43,9 +38,6 @@ body {
     color: #000000; 
 }
 
-/* ==========================================================================
-   1. ШАПКА И НАВИГАЦИЯ
-   ========================================================================== */
 .header {
     background-color: #ffffff;
     position: fixed; 
@@ -53,7 +45,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 1000;
-    border-bottom: 1px solid #000000; /* Контрастная черная линия */
+    border-bottom: 1px solid #000000;
 }
 
 .header-container {
@@ -91,7 +83,6 @@ body {
     color: #000000;
 }
 
-/* ИКОНКА БУРГЕРА */
 .burger-btn {
     display: none;
     flex-direction: column;
@@ -113,9 +104,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* ==========================================================================
-   2. БЛОК: ABOUT ME (Широкое фото + выравнивание влево)
-   ========================================================================== */
 .about-section {
     padding-top: 140px; 
     padding-bottom: 80px;
@@ -139,10 +127,10 @@ body {
 
 .about-banner {
     width: 100%; 
-    border-radius: 0; /* Убрали скругление */
+    border-radius: 0;
     overflow: hidden;
-    border: 1px solid #000000; /* Строгая рамка для панорамы */
-    aspect-ratio: 5712 / 1400; /* Четкое удержание пропорций вашей панорамы */
+    border: 1px solid #000000;
+    aspect-ratio: 5712 / 1400;
 }
 
 .about-image {
@@ -155,7 +143,7 @@ body {
 .about-content {
     width: 100%;
     text-align: left;
-    max-width: 800px; /* Ограничение ширины для удобства чтения строк */
+    max-width: 800px;
     margin: 0;         
 }
 
@@ -165,9 +153,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* ==========================================================================
-   3. БЛОК: ПОРТФОЛИО (Асимметричный коллаж из сетки)
-   ========================================================================== */
 .portfolio-section {
     padding: 100px 0;
     background-color: #ffffff; 
@@ -180,21 +165,20 @@ body {
     color: #000000;
 }
 
-/* Настройка CSS Grid */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 равные колонки на ПК */
-    grid-auto-rows: 160px; /* Базовый шаг высоты строк */
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 160px;
     gap: 20px;
-    grid-auto-flow: dense; /* Автозаполнение пустых ячеек */
+    grid-auto-flow: dense;
 }
 
 .portfolio-item {
     position: relative;
     border-radius: 0;
     overflow: hidden;
-    background-color: #ffffff;
-    border: 1px solid #000000; /* Черные рамки для работ */
+    background-color: #1a1a1a;
+    border: 1px solid #000000;
 }
 
 .portfolio-item img, 
@@ -205,28 +189,26 @@ body {
     display: block;
 }
 
-/* Размеры элементов для эффекта "хаоса" */
 .item-vertical { grid-row: span 4; }
 .item-horizontal { grid-column: span 2; grid-row: span 2; }
 .item-square { grid-row: span 2; grid-column: span 1; }
 .item-tall-video { grid-row: span 5; }
 .item-wide { grid-column: span 2; grid-row: span 2; }
 
-/* Полупрозрачная строгая подсказка */
 .item-hint {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Плотный черный цвет */
+    background-color: rgba(0, 0, 0, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     text-align: center;
-    opacity: 0; /* Изначально скрыта */
-    transition: opacity 0.2s ease; /* Быстрое появление без лишних анимаций движения */
+    opacity: 0;
+    transition: opacity 0.2s ease;
     pointer-events: none;
 }
 
@@ -237,14 +219,10 @@ body {
     line-height: 1.4;
 }
 
-/* Показ подсказки при наведении мыши */
 .portfolio-item:hover .item-hint {
     opacity: 1;
 }
 
-/* ==========================================================================
-   4. БЛОК: СОЦ. СЕТИ (Вместо формы обратной связи)
-   ========================================================================== */
 .socials-section {
     padding: 100px 0;
     background-color: #ffffff;
@@ -261,7 +239,7 @@ body {
 .contacts-list {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Зазор между строками контактов */
+    gap: 15px;
     text-align: left;
 }
 
@@ -270,13 +248,11 @@ body {
     font-weight: bold;
 }
 
-/* Серый цвет для названий соцсетей (как в меню) */
 .contact-label {
     color: #555555;
     margin-right: 8px;
 }
 
-/* Интерактивный никнейм */
 .contact-value {
     color: #555555;
     cursor: pointer;
@@ -284,12 +260,10 @@ body {
     transition: color 0.2s ease;
 }
 
-/* Подсветка при наведении */
 .contact-value:hover {
     color: #000000;
 }
 
-/* Всплывающая микро-подсказка "copied!", которая появится после клика */
 .contact-value::after {
     content: 'copied!';
     position: absolute;
@@ -305,14 +279,10 @@ body {
     transition: opacity 0.15s ease;
 }
 
-/* Класс активации подсказки (добавим через JS) */
 .contact-value.copied::after {
     opacity: 1;
 }
 
-/* ==========================================================================
-   5. ПОДВАЛ (Footer)
-   ========================================================================== */
 .footer {
     background-color: #ffffff;
     padding: 40px 0;
@@ -331,9 +301,6 @@ body {
     font-size: 14px;
 }
 
-/* ==========================================================================
-   7. КНОПКА "НАВЕРХ" (ДЛЯ ВСЕХ ВЕРСИЙ)
-   ========================================================================== */
 .back-to-top {
     position: fixed;
     bottom: 30px;
@@ -350,35 +317,26 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 999;
-    
-    /* Изначально скрываем кнопку */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.2s, color 0.2s;
 }
 
-/* Показываем кнопку (класс добавится через JS) */
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
 }
 
-/* Эффект инверсии при наведении */
 .back-to-top:hover {
     background-color: #ffffff;
     color: #000000;
 }
 
-/* ==========================================================================
-   6. АДАПТИВНАЯ ВЕРСТКА (Медиа-запросы)
-   ========================================================================== */
 @media (max-width: 768px) {
-    /* --- 1. КНОПКА БУРГЕР-МЕНЮ --- */
     .burger-btn {
         display: flex;
     }
 
-    /* --- 2. ВЫЕЗЖАЮЩАЯ НАВИГАЦИЯ --- */
     .navigation {
         position: fixed;
         top: 0;
@@ -405,7 +363,6 @@ body {
         margin-left: 0;
     }
 
-    /* АНИМАЦИЯ ИКОНКИ БУРГЕРА В КРЕСТИК */
     .burger-btn.active span:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
@@ -416,7 +373,6 @@ body {
         transform: translateY(-9px) rotate(-45deg);
     }
 
-    /* --- 3. АДAПТАЦИЯ БЛОКА ABOUT ME --- */
     .about-container {
         gap: 20px;
     }
@@ -425,20 +381,18 @@ body {
         margin-bottom: 20px;
     }
 
-    /* --- 4. МОБИЛЬНАЯ СЕТКА ПОРТФОЛИО (СТРОГО ДРУГ ПОД ДРУГОМ) --- */
     .portfolio-grid {
-        display: flex;          /* Переключаем с Grid на Flexbox, чтобы выстроить всё в один ряд */
-        flex-direction: column; /* Элементы встают строго друг под другом */
-        gap: 25px;              /* Зазор между работами на телефоне */
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
     }
 
     .portfolio-item {
         width: 100%;
-        height: auto;           /* Высота теперь зависит от контента, а не от сетки */
+        height: auto;
         border: 1px solid #000000;
     }
 
-    /* Сбрасываем абсолютно все свойства растяжения ячеек, которые были на ПК */
     .portfolio-item, 
     .item-vertical, 
     .item-horizontal, 
@@ -449,15 +403,13 @@ body {
         grid-row: auto !important;
     }
 
-    /* Заставляем медиа внутри карточек сохранять свои истинные пропорции */
     .portfolio-item img, 
     .portfolio-item video {
         width: 100%;
-        height: auto;           /* Картинка или видео развернется на всю свою высоту без обрезки */
-        object-fit: contain;    /* Контент не будет сжиматься или растягиваться */
+        height: auto;
+        object-fit: contain;
     }
 
-    /* --- 5. КОНТАКТЫ --- */
     .social-buttons {
         flex-direction: column;
         gap: 15px;
